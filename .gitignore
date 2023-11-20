@@ -1,3 +1,14 @@
-build
-node_modules
-**/artifacts/**
+# Coin98 EVM contract gitignore
+/.DS_Store
+/.env
+/.npmrc
+/.prettierrc
+/.yarn
+/artifacts
+/cache
+/node_modules
+/package-lock.json
+/pnpm-lock.yaml
+/typechain-types
+/yarn-error.log
+/yarn.lock
