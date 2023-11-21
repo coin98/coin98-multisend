@@ -14,10 +14,7 @@ contract C98MultiSend is VRC25 {
 
     // Transfer multi main network coin
     // Example ETH, BSC, HT
-    function transferMulti(
-        address[] calldata receivers,
-        uint256[] calldata amounts
-    ) public payable {
+    function transferMulti(address[] calldata receivers, uint256[] calldata amounts) public payable {
         require(msg.value != 0 && msg.value == getTotalSendingAmount(amounts));
         for (uint256 i = 0; i < amounts.length; i++) {
             payable(receivers[i]).transfer(amounts[i]);
@@ -26,21 +23,12 @@ contract C98MultiSend is VRC25 {
     }
 
     // Transfer multi token VRC25
-    function transferMultiToken(
-        address tokenAddress,
-        address[] calldata receivers,
-        uint256[] calldata amounts
-    ) public {
+    function transferMultiToken(address tokenAddress, address[] calldata receivers, uint256[] calldata amounts) public {
         require(receivers.length == amounts.length && receivers.length != 0);
 
         for (uint i = 0; i < receivers.length; i++) {
             require(amounts[i] > 0 && receivers[i] != address(0));
-            AdvancedVRC25.safeTransferFrom(
-                tokenAddress,
-                msg.sender,
-                receivers[i],
-                amounts[i]
-            );
+            AdvancedVRC25.safeTransferFrom(tokenAddress, msg.sender, receivers[i], amounts[i]);
 
             emit transfer(msg.sender, receivers[i], amounts[i], tokenAddress);
         }
